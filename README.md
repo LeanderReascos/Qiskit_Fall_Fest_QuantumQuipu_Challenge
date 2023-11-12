@@ -121,16 +121,16 @@ $$ \mathcal{U}_{\Phi(\mathbf{x})}=\prod_d U_{\Phi(\mathbf{x})}H^{\otimes n},\ U_
 
 que contiene capas de puertas de Hadamard entrelazadas con bloques entrelazados, $U_{\Phi(\mathbf{x})}$, que codifican los datos clásicos como se muestra en el diagrama de circuito a continuación para $d=2$.
 
-![`Feature Map`](Images/featuremap.png)
+![`Feature Map`](Images/featuremap.PNG)
 
 Dentro de los bloques entrelazados, $U_{\Phi(\mathbf{x})}$: $P_i \in \{ I, X, Y, Z \}$ denota las matrices de Pauli, el índice $S$ describe conectividades entre diferentes qubits o puntos de datos: $S \in \{\binom{n}{k}\ combinaciones,\ k = 1,... n \}$, y por defecto la función de mapeo de datos es $\phi_S(\mathbf{x} )$.
 
 Para optimizar los resultados de manera empírica, se decidió utilizar el siguiente mapa de características personalizado:
 
-$$\phi_S:\mathbf{x}\mapsto \Bigg\{\begin{array}{ll}
+$$\phi_S:\mathbf{x}\mapsto \Bigg\\{\begin{array}{ll}
     x_i & \text{if}\ S=\{i\} \\
         \sin(\pi-x_i)\sin(\pi-x_j) & \text{if}\ S=\{i,j\}
-    \end{array} \Bigg\}$$
+    \end{array} \Bigg\\}$$
 
 ### EfficientSU2
 
