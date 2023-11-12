@@ -80,7 +80,7 @@ El mejor circuito encontrado en términos de recursos cuánticos utilizados, es 
 
 Sin embargo, es posible observar que el aumento de capas lleva a un aumento en la precisión de los datos de entrenamiento, pero no en los datos de prueba. Esto se debe a que el Circuito 1 ya ha alcanzado la máxima precisión posible para los datos de prueba, que es 0.995, es decir, un único valor mal clasificado.
 
-Con estos resultados tambien es posible observar que se verifica los resultados de los papres [^1] y [^2], ya que se puede observar que con un solo qubit se puede resolver el problema de clasificacion como fue observado en [^2]. Ademas que la cantidad de frecuencias que es posible acceder esta limitada por la cantidad de capas de codificacion, como se observa en [^1].
+Con estos resultados tambien es posible observar que se verifica los resultados de los papers [^1] y [^2], ya que se puede observar que con un solo qubit se puede resolver el problema de clasificacion como fue observado en [^2]. Ademas que la cantidad de frecuencias que es posible acceder esta limitada por la cantidad de capas de codificacion, como se observa en [^1].
 
 Esto también se puede observar en el siguiente gráfico, que muestra el valor esperado del operador Pauli Z $\langle Z\rangle$ así como las probabilidades de medir los estados $\ket{0}$ y $\ket{1}$.
 
