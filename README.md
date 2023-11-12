@@ -154,3 +154,11 @@ Notar que el circuito 3 usó el parámetro su2_gates=['rx', 'y'].
 El mejor resultado se logra con el Circuito 1, utilizando el modelo de ansatz llamado EfficientSU2, con num_qubits=4 y reps=2.
 
 Además, se observa, según los resultados obtenidos en el Circuito 2, que no se mejora la precisión del modelo al aumentar el número de repeticiones. Esto sugiere que, en algunos casos, un mayor número de repeticiones puede no traducirse en una mejora significativa en la precisión del modelo. Es crucial evaluar y ajustar los parámetros según el rendimiento observado en el conjunto de prueba para evitar sobreajustes y optimizar la eficiencia del modelo cuántico.
+
+## Conclusiones
+
+En este proyecto, se presentaron dos métodos para la codificación de datos en un circuito cuántico destinado a la clasificación de datos. El primer método implicó la codificación de datos mediante el algoritmo de Data Reuploading, utilizando únicamente la feature 2. En contraste, el segundo método involucró la codificación de datos mediante el Quantum Feature Map, utilizando el PCA sobre los datos. Estas estrategias exploran enfoques distintos para la preparación de datos cuánticos, destacando la versatilidad y las opciones disponibles para abordar problemas de clasificación cuántica.
+
+Con estos resultados, se pudo verificar tanto los hallazgos previos en la literatura sobre el Data Reuploading como clasificador y aproximador de funciones universal. Es importante destacar que se logró encontrar un circuito cuántico con una cantidad mínima de recursos cuánticos que logra clasificar los datos con una alta precisión. Es decir, con un solo qubit y solo una capa de codificación se alcanzó una precisión del 99.5% en el conjunto de entrenamiento y del 98.75% en el conjunto de prueba.
+
+En contraste, el segundo método, utilizando el Quantum Feature Map, no logró encontrar un circuito que alcanzara una precisión tan alta como el primer método. No obstante, este enfoque permitió explorar diferentes métodos para abordar el mismo problema de clasificación, proporcionando una perspectiva valiosa y ampliando la comprensión de las capacidades y limitaciones de estos enfoques cuánticos.
