@@ -19,11 +19,11 @@ Se analizaron los datos de entrenamiento y prueba para observar la distribución
 
 ### Correlación entre variables
 
-![Correlación entre variables](images/Correlation_heatmap.png)
+![Correlación entre variables](Images/Correlation_heatmap.png)
 
 ### Distribución de los datos
 
-![Distribución de los datos](images/distribution.png)
+![Distribución de los datos](Images/distribution.png)
 
 Basándonos en estos resultados, es fácil observar que la característica 2 es la que presenta mayor correlación con el objetivo y que su distribución facilita la clasificación. Además, se puede concluir que no existe correlación en las demás características.
 
@@ -82,7 +82,7 @@ Esto también se puede observar en el siguiente gráfico, que muestra el valor e
 
 #### Circuito 1 - 1 Qubit, 1 Capa
 
-![Circuito 1 - 1 Qubit, 1 Capa](images/one_freq.png)
+![Circuito 1 - 1 Qubit, 1 Capa](Images/one_freq.png)
 
 En resumen, tras analizar varios enfoques utilizando diferentes configuraciones de capas y qubits, se observó que aumentar la cantidad de qubits y agregar entrelazamiento no necesariamente mejora la precisión del circuito para este problema específico. La precisión máxima lograda previamente no se superó al incrementar las capas y qubits, indicando que la complejidad adicional no se traduce en una mejora significativa en la precisión. Esto se debe a la simplicidad del problema. Es importante destacar que la complejidad del modelo no siempre garantiza mejoras en el rendimiento, y cada problema puede requerir un enfoque particular.
 
