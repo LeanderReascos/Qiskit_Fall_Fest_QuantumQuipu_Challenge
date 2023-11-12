@@ -90,3 +90,49 @@ Esto también se puede observar en el siguiente gráfico, que muestra el valor e
 
 En resumen, tras analizar varios enfoques utilizando diferentes configuraciones de capas y qubits, se observó que aumentar la cantidad de qubits y agregar entrelazamiento no necesariamente mejora la precisión del circuito para este problema específico. La precisión máxima lograda previamente no se superó al incrementar las capas y qubits, indicando que la complejidad adicional no se traduce en una mejora significativa en la precisión. Esto se debe a la simplicidad del problema. Es importante destacar que la complejidad del modelo no siempre garantiza mejoras en el rendimiento, y cada problema puede requerir un enfoque particular.
 
+## Método 2: Feature Map con EfficientSU2 y Qiskit
+
+**El notebook que contiene todos los resultados de este método se encuentra en el notebook [`RetoQuantumQuipuQiskit.ipynb`](RetoQuantumQuipuQiskit.ipynb).**
+
+### Principal Component Analysis (PCA)
+
+La reducción dimensional utilizando el método PCA y las redes neuronales aborda la tarea crítica de reducir la complejidad de los datos. Mientras PCA se basa en descubrir las direcciones de mayor varianza en el conjunto de datos, las redes neuronales pueden lograr la reducción de dimensionalidad mediante una capa central que representa de manera eficiente los datos. La implementación común de este enfoque implica una red codificadora que transforma datos de alta dimensión en un código de baja dimensión, seguida por una red decodificadora que recupera los datos originales. Además, se destaca la posibilidad de utilizar máquinas de Boltzmann restringidas para modelar conjuntos de vectores binarios y asignar probabilidades a las imágenes a través de una función de energía.
+
+### Quantum Feature Map
+
+El Quantum Feature Map es un método que mapea un vector de características clásico $\mathbf{x}$ a un estado cuántico $|\Phi(\mathbf{x}) \rangle\langle\Phi(\mathbf{x})|$ mediante la operación unitaria $\mathcal{U}{\Phi(\mathbf{x})}$ en el estado inicial $|0\rangle^{n}$, donde n es el número de qubits utilizados. Los mapas de características disponibles en Qiskit, como [`PauliFeatureMap`](https://qiskit.org/documentation/stubs/qiskit.circuit.library.PauliFeatureMap.html), 
+[`ZZFeatureMap`](https://qiskit.org/documentation/stubs/qiskit.circuit.library.ZFeatureMap.html) y 
+[`ZFeatureMap`](https://qiskit.org/documentation/stubs/qiskit.circuit.library.ZZFeatureMap.html) son los introducidos en 
+[ _Havlicek y otros_. Nature **567**, 209-212 (2019)](https://www.nature.com/articles/s41586-019-0980-2), 
+introducidos en un estudio reciente, se diseñan para implementarse en dispositivos cuánticos de corta profundidad. El PauliFeatureMap se define mediante el operador unitario $\mathcal{U}{\Phi(\mathbf{x})}$ con capas de puertas de Hadamard entrelazadas con bloques entrelazados $U_{\Phi(\mathbf{x})}$. Estos bloques codifican datos clásicos y están basados en matrices de Pauli. El texto proporciona una descripción detallada de la implementación del PauliFeatureMap y destaca la conjetura de que `ZZFeatureMap` es difícil de simular clásicamente. Se incluye un diagrama de circuito para visualizar la estructura del Quantum Feature Map.
+
+El `PauliFeatureMap` se define como:
+
+```python
+PauliFeatureMap(feature_dimension=None, reps=2,
+                entanglement='full', paulis=None,
+                data_map_func=None, parameter_prefix='x',
+                insert_barriers=False)
+```
+
+y describe el operador unitario de profundidad $d$:
+
+$$ \mathcal{U}_{\Phi(\mathbf{x})}=\prod_d U_{\Phi(\mathbf{x})}H^{\otimes n},\ U_{\Phi(\mathbf {x})}=\exp\left(i\sum_{S\subseteq[n]}\phi_S(\mathbf{x})\prod_{k\in S} P_i\right), $$
+
+que contiene capas de puertas de Hadamard entrelazadas con bloques entrelazados, $U_{\Phi(\mathbf{x})}$, que codifican los datos clásicos como se muestra en el diagrama de circuito a continuación para $d=2$.
+
+![`Feature Map`](Images/featuremap.png)
+
+Dentro de los bloques entrelazados, $U_{\Phi(\mathbf{x})}$: $P_i \in \{ I, X, Y, Z \}$ denota las matrices de Pauli, el índice $S$ describe conectividades entre diferentes qubits o puntos de datos: $S \in \{\binom{n}{k}\ combinaciones,\ k = 1,... n \}$, y por defecto la función de mapeo de datos es $\phi_S(\mathbf{x} )$.
+
+Para optimizar los resultados de manera empírica, se decidió utilizar el siguiente mapa de características personalizado:
+
+$$\phi_S:\mathbf{x}\mapsto \Bigg\{\begin{array}{ll}
+    x_i & \text{if}\ S=\{i\} \\
+        \sin(\pi-x_i)\sin(\pi-x_j) & \text{if}\ S=\{i,j\}
+    \end{array} \Bigg\}$$
+
+### EfficientSU2
+
+Para la parte del circuito varacional fue utilizado el circuito `EfficientSU2` de Qiskit. El circuito EfficientSU2 consta de capas de operaciones de un solo qubit abarcadas por SU(2) y entrelazados. Este es un patrón heurístico que se puede utilizar para preparar funciones de onda de prueba para algoritmos cuánticos variacionales o circuitos de clasificación para aprendizaje automático.
+
