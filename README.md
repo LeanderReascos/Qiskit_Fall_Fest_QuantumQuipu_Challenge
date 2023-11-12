@@ -136,3 +136,21 @@ $$\phi_S:\mathbf{x}\mapsto \Bigg\{\begin{array}{ll}
 
 Para la parte del circuito varacional fue utilizado el circuito `EfficientSU2` de Qiskit. El circuito EfficientSU2 consta de capas de operaciones de un solo qubit abarcadas por SU(2) y entrelazados. Este es un patrón heurístico que se puede utilizar para preparar funciones de onda de prueba para algoritmos cuánticos variacionales o circuitos de clasificación para aprendizaje automático.
 
+Así, el entrenamiento se realizó utilizando el optimizador de Qiskit `COBYLA` y el algoritmo de clasificación `VQC`. Además, se utilizó la primitiva de Qiskit `Sampler` y una función personalizada de `callback` para verificar el proceso de entrenamiento.
+
+### Resultados
+
+Se entrenaron 3 circuitos para comparar la calidad de la solución, la cantidad de recursos utilizados y cómo estos afectan a la solución. Los circuitos se resumen en la siguiente tabla:
+
+| Circuito | Num Qubits | Num Reps | Accuracy Train | Accuracy Test |
+|-----------|------------|----------|-----------------|----------------|
+| 1         | 4          | 2        | 0.94            | 0.91           |
+| 2         | 4          | 3        | 0.91            | 0.89           |
+| 3         | 4          | 2        | 0.54            | 0.59           |
+
+
+Notar que el circuito 3 usó el parámetro su2_gates=['rx', 'y'].
+
+El mejor resultado se logra con el Circuito 1, utilizando el modelo de ansatz llamado EfficientSU2, con num_qubits=4 y reps=2.
+
+Además, se observa, según los resultados obtenidos en el Circuito 2, que no se mejora la precisión del modelo al aumentar el número de repeticiones. Esto sugiere que, en algunos casos, un mayor número de repeticiones puede no traducirse en una mejora significativa en la precisión del modelo. Es crucial evaluar y ajustar los parámetros según el rendimiento observado en el conjunto de prueba para evitar sobreajustes y optimizar la eficiencia del modelo cuántico.
