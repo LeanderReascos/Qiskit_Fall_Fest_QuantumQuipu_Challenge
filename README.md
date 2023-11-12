@@ -7,8 +7,10 @@ Este proyecto se enfoca en codificar los archivos [challenge_train.csv](https://
 
 ---
 
+# Solución: Quantum Quixotes
 
-# Solución
+Para obtener un resumen más visual de la solución al reto presentada, se puede acceder a la presentación [Quantum Quixotes.pptx](Quantum%20Quixotes.pptx) o al video corto [Quantum Quixotes.mp4](Quantum%20Quixotes.mp4).
+
 ## Analisis de los datos
 
 Los datos proporcionados para este problema constan de dos conjuntos de datos: uno de entrenamiento y otro de prueba. Ambos conjuntos están compuestos por 4 características y un objetivo. Las características son variables continuas, y el objetivo es una variable discreta que puede tomar dos valores, 0 o 1.
