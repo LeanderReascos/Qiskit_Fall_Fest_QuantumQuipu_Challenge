@@ -31,7 +31,9 @@ De esta manera, se siguieron dos métodos para el uso de los datos. El primero, 
 
 Estas técnicas se utilizaron para la codificación de los datos en el circuito cuántico. La primera técnica se empleó con el primer método de codificación, mientras que la segunda técnica se utilizó con el segundo método de codificación.
 
-## Método 1: Data Reuploading
+## Método 1: Data Reuploading con Pennylane y PyTorch
+
+**El notebook que contiene todos los resultados de este método se encuentra en el notebook [`Data_Reuploading_Results.ipynb`](Data_Reuploading_Results.ipynb).**
 
 Para la clasificación de datos, se utilizó el algoritmo de Data Reuploading, que implica la repetición de capas $L(\theta_i, x)$, donde $\theta_i$ es un vector de parámetros y $x$ es el vector de características. Cada capa consta de un bloque de codificación $S(x)$ y un bloque de parámetros entrenables $W(\theta_i)$. Al final de varias capas, se añade un bloque adicional de entrenamiento para garantizar la alternancia entre un bloque de codificación y uno de entrenamiento.
 
@@ -45,6 +47,8 @@ Basándonos en esto y considerando la simplicidad del problema, es factible conc
 [^2]: https://arxiv.org/abs/1907.02085
 
 ### Resumen del Entrenamiento
+
+Los datos utilizados para este método fueron normalizados para estar en el rango de valores de $-\pi$ a $\pi$. Además, se empleó únicamente la feature 2, como se mencionó anteriormente.
 
 Se realizaron entrenamientos de varios circuitos utilizando PyTorch con el optimizador Adam. Se empleó un learning rate variable de 0.2 y un batch size de 100 durante 100 epochs. Se implementó una reducción del learning rate en un factor de 0.5 cada 10 epochs si el loss no mejoraba, deteniendo el entrenamiento después de 3 reducciones del learning rate sin mejora.
 
